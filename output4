@@ -1,0 +1,32 @@
+=== NLIS/ ===
+<head><title>
+            <form method="post" action="./" id="Form1" class="ui large form">
+=== NCLINIC/ ===
+=== SIS/ ===
+<head><title>
+    <form method="post" action="./" id="form1">
+=== inventory/ ===
+                <title>WIMS- Web based Inventory Management System </title>
+                <form name="form1" action="commonfiles/asp/InnerHome.asp" method="post">
+                                                                <td><a href="JavaScript:check()"><img src="COMMONFILES/IMAGES/loginqq.jpg" alt="login" height="32" border="0"></a></td>
+=== medicalrecords/ ===
+<head id="Head1"><title>
+    <form name="form1" method="post" action="./" id="form1">
+=== zoomreports/ ===
+<head><title>
+    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
+                        <form method="post" action="./" id="form1" class="form-signin">
+=== ntask/ ===
+=== nmconline/ ===
+                <title>WHIS- Web based Hospital Management System </title>
+                <form name="form1" action="commonfiles/asp/InnerHome.asp" method="post">
+                                                                <td><a href="JavaScript:check()"><img src="COMMONFILES/IMAGES/loginqq.jpg" alt="login" height="24" border="0" onclick="return fun()"></a></td>
+=== NIS/ ===
+    <title>NARAYANA Professional Group Login</title>
+    <script type="text/javascript" src="Loginfiles/js/jquery-min.js"></script>
+    <script type="text/javascript" src="Loginfiles/js/jquery1.11.3.min.js"></script>
+    <script type="text/javascript" src="Loginfiles/js/bootstrap.js"></script>
+                        <form method="post" action="./" id="ctl00">
+=== unlis/ ===
+<head><title>
+            <form method="post" action="./" id="Form1" class="ui large form">
