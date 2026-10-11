@@ -1,0 +1,257 @@
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== 1. inventory/ full page ===" && curl -k -s -L "https://narayanagroup.co.in/inventory/" && echo -e "\n=== 2. nmconline/InnerHome.asp direct check ===" && curl -k -s -D - "https://narayanagroup.co.in/nmconline/commonfiles/asp/InnerHome.asp" | head -n 45 && echo -e "\n=== 3. NCLINIC/ & ntask/ ===" && curl -k -s -L "https://narayanagroup.co.in/NCLINIC/" | head -n 40 && echo "--- ntask ---" && curl -k -s -L "https://narayanagroup.co.in/ntask/" | head -n 40
+=== 1. inventory/ full page ===
+
+<HTML>
+        <HEAD>
+                <title>WIMS- Web based Inventory Management System </title>
+                <script language="javascript">
+function fnLoad()
+{
+   document.form1.LoginId.focus();
+} 
+                </script>
+
+                <STYLE TYPE="text/css">
+
+BODY {
+background-color: #FFFFFF; background-image: url("COMMONFILES\IMAGES\images\HomePageLTT.jpg"); background-repeat: no-repeat;background-position: 50% 50%}
+
+</STYLE>
+        </HEAD>
+        <body bgColor="#f7941d" leftMargin="0" topMargin="0" scroll="no" onload="fnLoad()" marginheight="0">
+                <form name="form1" action="commonfiles/asp/InnerHome.asp" method="post">
+
+                        <!--<table width="779" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                        <td width="654"><IMG src="COMMONFILES/IMAGES/TopImage6.JPG" width="433" height="68"></td>
+                                        <td>
+                                        </td>
+                                </tr>
+                        </table>-->
+                        <table width="779" border="0" align="center" cellPadding="0" cellSpacing="0">
+                                <!--<tr>
+                                        <td align="right" vAlign="top" background="COMMONFILES/IMAGES/bg.jpg" height="24">&nbsp;</td>
+                                        <TD vAlign="top" align="right" width="416" rowSpan="3">
+
+                                                <div align="right"><IMG src="COMMONFILES\IMAGES\images\HomePageLTT.jpg" width="416" height="349" id="IMG1"></div>
+                                        </TD>
+                                </tr>-->
+                                <tr>
+                                        <td width="363" align="right" vAlign="top" >&nbsp;
+                                                <br>
+                                                <br>
+                                                <br><br>
+                                                <br>
+                                                <br><br>
+                                                <br>
+                                                <br>
+                                                <div align="left">&nbsp;&nbsp;&nbsp; <FONT face="verdana" color="black" size="2"><STRONG>
+
+                                                                </STRONG></FONT>
+                                                </div>
+                                        </td>
+                                </tr>
+                                <br>
+                                <br>
+                                <br>
+                                <tr>
+                                        <td width="363" ><p>&nbsp;</p>
+                                                <table width="200" border="0" align="center">
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">LoginID</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <input onKeyDown="enter()" size="15" name="LoginId">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Opr 
+                                                                                                Code</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <input onKeyDown="enter()" size="15" name="UserName">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Password</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><INPUT onkeydown="enter1()" type="password" size="15" name="password">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <TR>
+                                                                <TD>&nbsp;</TD>
+                                                                <td><a href="JavaScript:check()"><img src="COMMONFILES/IMAGES/loginqq.jpg" alt="login" height="32" border="0"></a></td>
+                                                        </TR>
+                                                </table>
+                                                <div align="left"></div>
+                                        </td>
+                                </tr>
+                        </table>
+                        <!--<table cellSpacing="0" cellPadding="0" width="80%" align="center" border="0">
+                                <tr>
+                                        <td></A><br>
+                                                <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2"></font></div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td height="34">
+                                                <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="1">A 
+                                                                Product of Narayana Group. All Rights Reserved.@2010</font></div>
+                                        </td>
+                                </tr>
+                        </table>-->
+                </form>
+                <script language="JavaScript">
+function enter()
+{
+  if(event.keyCode==13)
+        event.keyCode=9;
+}
+
+function enter1()
+{
+  if(event.keyCode==13)
+        check();
+        //document.form1.submit();
+}
+
+function check()
+{
+if (chkName(document.form1.LoginId.value,"Login ID")==false)
+document.form1.LoginId.focus();
+   else if (chkName(document.form1.UserName.value,"User Name")==false)
+                document.form1.UserName.focus();
+   else if (chkName(document.form1.password.value,"Password")==false)
+        document.form1.password.focus();
+   else
+                document.form1.submit();
+}
+
+function chkName(val,title)
+{
+        if (val.length==0)
+        {       alert("Please enter the "+title);
+                return false 
+        }
+        else
+        {       var ptn = /^[-_\w\.]+$/;
+                if (ptn.test(val))
+                        return true
+                else
+                {       alert("Please enter AlphaNumeric characters only in "+title);
+                        return false 
+                }
+        }
+}
+
+                </script>
+        </body>
+</HTML>
+
+=== 2. nmconline/InnerHome.asp direct check ===
+HTTP/1.1 302 Object moved
+Date: Sun, 11 Oct 2026 12:12:27 GMT
+Server: Apache
+Cache-Control: private
+Content-Type: text/html
+Location: ../../default.asp?logInFlag=0
+X-Powered-By: ASP.NET
+Content-Length: 150
+Set-Cookie: ASPSESSIONIDQCQRQDSB=OLHNJDIBHPLLGGEDLGEFOAJH; path=/
+Vary: Accept-Encoding
+
+<head><title>Object moved</title></head>
+<body><h1>Object Moved</h1>This object may be found <a HREF="../../default.asp?logInFlag=0">here</a>.</body>
+
+=== 3. NCLINIC/ & ntask/ ===
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>
+        NCLINIC::User Login
+</title><link href="Images/favicon.ico" rel="Shortcut Icon" type="image/x-icon" /><link href="Scripts/DataTables/bootstrap.3.3.5.min.css" rel="stylesheet" /><link href="Scripts/DataTables/semantic.min.css" rel="stylesheet" />
+    <script src="Scripts/DataTables/semantic.min.2.4.1.js"></script>
+    <script type="text/javascript" src="Scripts/Script.js"></script>
+    <script type="text/javascript">
+    function Validations()
+    {
+        var Uid=document.getElementById("txtUserId").value;
+        var Pwd=document.getElementById("txtPassword").value;
+        if(Uid=="")
+        {
+            alert("Enter User Id");
+            document.getElementById("txtUserId").focus();
+            return false;
+        }
+        else if(Pwd=="")
+        {
+            alert("Enter Password");
+            document.getElementById("txtPassword").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function getLocalIpAddress() {
+        // Using a third-party service to get the public IP address
+        fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ipAddress = data.ip;
+            
+
+        //document.getElementById('ipAddress').innerText = `Your Public IP Address: ${ipAddress}`;
+        if(ipAddress==""){
+            window.sessionStorage.setItem("PublicIPAddress", "");
+        }else{
+--- ntask ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Ntask</title>
+  <meta name="description" content="Sign in to the Ntask Project Management System." />
+  <link rel="stylesheet" href="https://narayanagroup.co.in/ntask/css/app.css" />
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header" style="text-align:center;">
+      <img src="https://narayanagroup.co.in/ntask/images/logo.png" alt="Ntask Logo" style="max-height:100px; width:auto; margin:0 auto 12px; display:block; object-fit:contain;" />
+      <p style="font-size:0.9rem; color:var(--text-muted);">Sign in to your account to continue</p>
+    </div>
+
+    <div class="login-body">
+      
+      <form id="login-form" action="https://narayanagroup.co.in/ntask/login" method="POST" novalidate>
+        <input type="hidden" name="_token" value="uPuUiNmuiR70SsPf52Zk8cSPfgEplsEKl1fw4sWm" autocomplete="off">
+        <div class="form-group">
+          <label class="form-label" for="email">Email address or Employee ID</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            value=""
+            required
+            autocomplete="username"
+            placeholder="e.g. EMP001 or name@company.com"
+          />
+                  </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            type="password"
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
+
+
+
+
+
+
+
