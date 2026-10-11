@@ -1,0 +1,410 @@
+                                                                                                                                                                                                                                                                        
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && for f in \
+  "Nnote/index.html" "Nnote/layout.html" "Nnote/resetpin.html" "Nnote/registration.html" \
+  "ncare/index.html" "ncare/layout.html" "ncare/changepin.html"; do \
+  echo "==================== $f ===================="; \
+  curl -k -s "https://narayanagroup.co.in/$f" | grep -E -i '(apiURL|http|ajax|\$\.get|\$\.post|window\.location|empid|regno|pin|function )'; \
+done
+==================== Nnote/index.html ====================
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+        input#emppin {
+        input#emppin {
+        input#emppin {
+        input#emppin {
+                                <input name="empid" id="empid" placeholder="User Id" type="number" maxlength="12">
+                                <input name="emppin" id="emppin" placeholder="PIN" type="password" maxlength="5">
+                    <button class="ui red fluid submit button right labeled icon" type="button" id="forgotpin">
+                        Forgot/Change PIN
+                        <button class="ui negative submit button" id="forgotpin">Forgot PIN?</button>
+    function onDeviceReady() {
+    var apiURL = '../../NtraktApi/api/';
+    //var apiURL = 'http://115.241.194.2/NtraktApi/api/';
+    //var apiURL = 'http://localhost:64867/api/';
+    function onBackKeyDown() {
+    function isPhoneGap() {
+    $(document).ready(function () {
+        $("#empid").focus();
+        $("#empid").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 999999999999) {
+        $("#emppin").keypress(function (e) {
+                var typing_char = String.fromCharCode(e.which);
+                if (parseFloat(current_val + "" + typing_char) > 99999) {
+        $('#login').click(function () {
+            userData.OperatorCode = $("#empid").val();
+            userData.UniqueId = $("#emppin").val();
+            if ($("#empid").val() == "") {
+                $("#empid").focus();
+            } else if ($("#emppin").val() == "") {
+                alert('Please enter PIN');
+                $("#emppin").focus();
+                $.post(apiURL + 'CheckPin', userData, function (response) {
+                        alert('Invalid Employee Id/PIN. Please check.')
+                        $("#empid").val("");
+                        $("#emppin").val("");
+                        $("#empid").focus();
+                        //setTimeout(function () {
+                        // window.location.href = 'layout.html?empid=' + btoa($("#empid").val()) + "&title=" + btoa(response.data);
+                        window.location.href = 'layout.html?empid=' + btoa($("#empid").val()) + "&title=" + btoa(rresult1[0]) + "&campus=" + btoa(rresult1[1]);
+                }, 'json').fail(function (jqxhr, settings, ex) {
+        $('#register').click(function () {
+            window.location.href = 'registration.html';
+        $('#forgotpin').click(function () {
+            window.location.href = 'resetpin.html?empid=' + btoa($("#empid").val());
+    function CheckAppUpdate() {
+        /*$.get("./version.xml", function(data) {}).done(function(result) {
+            $.get(apiURL + 'Notifications/App/4029038', {
+                        window.location.href = "download.html";
+==================== Nnote/layout.html ====================
+    <input type="hidden" id="hempid" />
+    var apiURL = '../../NtraktApi/api/';
+    //var apiURL = 'http://localhost:64867/api/';
+    function onDeviceReady() {
+        document.addEventListener("backbutton", function (e) {
+    function qs() {
+        var query = window.location.search.substring(1);
+            $("#hempid").val(atob(qsParm["empid"]));
+            window.location.href = 'index.html';
+    function isPhoneGap() {
+    var timeout = setInterval(function runMe() {
+    $(document).ready(function () {
+        $.get("./version.xml", function (data) { }).done(function (result) {
+        }).fail(function (jqxhr, settings, ex) {
+            $('#ifrm').attr('src', 'request.html?empid=' + btoa($("#hempid").val()) + "&sid=" + btoa($("#hsid").val()) + "&sname=" + btoa($("#hsname").val())
+            $('#ifrm').attr('src', 'AssetTrans.html?empid=' + btoa($("#hempid").val()) + "&ano=" + btoa($("#hano").val()) + "&scan=" + btoa('Y'));
+            $('#ifrm').attr('src', 'AssetTrans.html?empid=' + btoa($("#hempid").val()) + "&ano=" + btoa($("#hano").val()));
+            $('#ifrm').attr('src', 'markattendance.html?empid=' + btoa($("#hempid").val()) + "&sname=" + btoa($("#hsname").val())
+            $('#ifrm').attr('src', 'request_eng.html?empid=' + btoa($("#hempid").val()) + "&sid=" + btoa($("#hsid").val()) + "&sname=" + btoa($("#hsname").val())
+            //$('#ifrm').attr('src', 'home.html?empid=' + btoa($("#hempid").val()));
+            $('#ifrm').attr('src', 'profile.html?empid=' + btoa($("#hempid").val()));
+        $('#notifications').click(function () {
+            $('#ifrm').attr('src', 'notifications.html?empid=' + btoa($("#hempid").val()));
+        $('#signout').click(function () {
+            $.get(apiURL + 'User/LogOut/' + $("#hempid").val(), function (response) {
+                window.location.href = 'index.html';
+            }).fail(function () {
+                window.location.href = 'index.html';
+        $('#profile').click(function () {
+            $('#ifrm').attr('src', 'profile.html?empid=' + btoa($("#hempid").val()));
+        $('#services').click(function () {
+            $('#ifrm').attr('src', 'services.html?empid=' + btoa($("#hempid").val()));
+        //$('#status').click(function () {
+        //    $('#ifrm').attr('src', 'invcanaprvlist.html?empid=' + btoa($("#hempid").val()));
+        // $('#reopen').click(function () {
+        //     $('#ifrm').attr('src', 'reopen.html?empid=' + btoa($("#hempid").val()));
+        // $('#reports').click(function () {
+        //     $('#ifrm').attr('src', 'complaintsList.html?empid=' + btoa($("#hempid").val()));
+        $('#more').click(function () {
+            //$('#ifrm').attr('src', 'more.html?empid=' + btoa($("#hempid").val()));
+            $('#ifrm').attr('src', 'morenew.html?empid=' + btoa($("#hempid").val()));
+    function menuActive(obj) {
+    function ShowNotifications() {
+        $.get(apiURL + 'Notifications/' + $("#hempid").val(), function (response) {
+                selectedArray = jQuery.grep(arrdata, function (data, i) {
+        }).fail(function () {
+    function ShowAppUpdate() {
+        $.get(apiURL + 'Notifications/App/4029038', function (response) {
+                    $('#download').click(function () {
+                        $(this).attr('href', 'http://115.241.194.19/nNote.apk');
+        }).fail(function () {
+==================== Nnote/resetpin.html ====================
+    <title>Reset PIN</title>
+                    <div class="ui red ribbon label">Reset Your PIN</div><br><br>
+                                <input id="empid" placeholder="User Id" type="number">
+                    <div class="ui red ribbon label">Create New PIN</div><br><br>
+                                <input id="pin" placeholder="Enter PIN" type="password" maxlength="5">
+                                <input id="cnfpin" placeholder="Confirm PIN" type="number" maxlength="5">
+                        <i class="icon tiny red asterisk"></i> <span class="ui tiny red header">PIN should contains 5 numeric letters only.</span>
+    <input type="hidden" id="hempid" />
+    var apiURL = '../../NtraktApi/api/';
+    //var apiURL = 'http://115.241.194.19/NtraktApi/api/';
+    function qs() {
+        var query = window.location.search.substring(1);
+            $("#hempid").val(atob(qsParm["empid"]));
+            window.location.href = 'index.html';
+        var empid = $("#hempid").val();
+        $("#empid").keypress(function(e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 9999999999) {
+        $("#pin").keypress(function(e) {
+        $("#cnfpin").keypress(function(e) {
+        $("#empid").keyup(function() {
+        if (empid.trim().length > 0) {
+            $.get(apiURL + 'CheckOperator/' + empid, function(response) {
+                    $.get(apiURL + 'User/Info/' + empid, function(response) {
+                            $("#empid").val(response.data[0].BioEmpNo);
+                            userData.EmpNo = empid;
+                            $.post(apiURL + 'User/OTP', userData, function(response) {
+                        $("#empid").focus();
+                    $("#empid").focus();
+                $("#empid").focus();
+            empid = $('#empid').val();
+            if (empid.trim().length > 0) {
+                $.get(apiURL + 'CheckOperator/' + empid, function(response) {
+                        $.get(apiURL + 'User/Info/' + empid, function(response) {
+                                $("#empid").val(response.data[0].BioEmpNo);
+                                userData.EmpNo = empid;
+                                $.post(apiURL + 'User/OTP', userData, function(response) {
+                            $("#empid").focus();
+                        $("#empid").focus();
+                    $("#empid").focus();
+            empid = $('#empid').val();
+            if (empid.trim().length > 0) {
+                userData.EmpNo = empid;
+                $.post(apiURL + 'User/OTP', userData, function(response) {
+            userData.EmpNo = empid;
+            $.post(apiURL + 'User/VerifyOTP', userData, function(response) {
+            if ($("#pin").val().trim().length == 0) {
+                alert('Please Enter PIN');
+                $("#pin").focus();
+            } else if ($("#cnfpin").val().trim().length == 0) {
+                alert('Please Enter Confirm PIN');
+                $("#cnfpin").focus();
+            } else if ($("#pin").val() != $("#cnfpin").val()) {
+                alert('Confirm PIN should not match to PIN');
+                $("#cnfpin").focus();
+                userData.OperatorCode = empid;
+                userData.UniqueId = $("#pin").val();
+                $.post(apiURL + 'User/UpdatePin', userData, function(response) {
+                        window.location.href = 'index.html';
+                        alert('Error in PIN Update. Please try again.')
+==================== Nnote/registration.html ====================
+                                <input id="empid" placeholder="User Id" type="number">
+                    <div class="ui red ribbon label">Create New PIN</div><br><br>
+                                <input id="pin" placeholder="Enter PIN" type="password" maxlength="5">
+                                <input id="cnfpin" placeholder="Confirm PIN" type="number" maxlength="5">
+                        <i class="icon tiny red asterisk"></i> <span class="ui tiny red header">PIN should contains 5 numeric letters only.</span>
+    <input type="hidden" id="hempid" />
+    var apiURL = '../../NnoteApi/api/Nnote/';
+    //var apiURL = 'http://115.241.194.19/NtraktApi/api/';
+    //var apiURL = 'http://localhost:6491/api/Nnote/';
+    function qs() {
+        var query = window.location.search.substring(1);
+            $("#hempid").val(atob(qsParm["empid"]));
+            window.location.href = 'index.html';
+    $(document).ready(function () {
+        var empid = $("#hempid").val();
+        $("#empid").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 999999999999) {
+        $("#pin").keypress(function (e) {
+        $("#cnfpin").keypress(function (e) {
+        $("#empid").keyup(function () {
+        if (empid.trim().length > 0) {
+            $.get(apiURL + 'CheckOperator_N/' + empid, function (response) {
+            }).done(function (response) {
+                    $.get(apiURL + 'User/Info/' + empid, function (response) {
+                    }).done(function (response) {
+                            $("#empid").val(response.data[0].BioEmpNo);
+                            userData.EmpNo = empid;
+                            $.post(apiURL + 'User/OTP', userData, function (response) {
+                            }).done(function () {
+                    }).fail(function () {
+                        $("#empid").focus();
+                    $("#empid").focus();
+            }).fail(function () {
+                $("#empid").focus();
+        $('#send').click(function () {
+            empid = $('#empid').val();
+            if (empid.trim().length > 0) {
+                $.get(apiURL + 'CheckOperator_N/' + empid, function (response) {
+                }).done(function (response) {
+                        $.get(apiURL + 'User/Info/' + empid, function (response) {
+                        }).done(function (response) {
+                                $("#empid").val(response.data[0].BioEmpNo);
+                                userData.EmpNo = empid;
+                                $.post(apiURL + 'User/OTP', userData, function (response) {
+                                }).done(function () {
+                        }).fail(function () {
+                            $("#empid").focus();
+                        window.location.href = 'index.html';
+                }).fail(function () {
+                    $("#empid").focus();
+        $('#resend').click(function () {
+            empid = $('#empid').val();
+            if (empid.trim().length > 0) {
+                userData.EmpNo = empid;
+                $.post(apiURL + 'User/OTP', userData, function (response) {
+                }).done(function () {
+        $('#verify').click(function () {
+            userData.EmpNo = empid;
+            $.post(apiURL + 'User/VerifyOTP', userData, function (response) {
+            }).done(function (response) {
+        $("#confirm").click(function () {
+            if ($("#pin").val().trim().length == 0) {
+                alert('Please Enter PIN');
+                $("#pin").focus();
+            } else if ($("#cnfpin").val().trim().length == 0) {
+                alert('Please Enter Confirm PIN');
+                $("#cnfpin").focus();
+            } else if ($("#pin").val() != $("#cnfpin").val()) {
+                alert('Confirm PIN should not match to PIN');
+                $("#cnfpin").focus();
+                userData.Userid = empid;
+                userData.Password = $("#pin").val();
+                $.post(apiURL + 'User/CreateUser', userData, function (response) {
+                }).done(function (response) {
+                        window.location.href = 'index.html';
+                        alert('Error in PIN Update. Please try again.')
+==================== ncare/index.html ====================
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+        input#pin {
+        input#pin {
+        input#pin {
+        input#pin {
+                                <input name="regno" id="regno" placeholder="Registration No" type="number"
+                                <input name="pin" id="pin" placeholder="PIN" type="password" maxlength="6">
+                    <button class="ui red fluid submit button right labeled icon" type="button" id="forgotpin">
+                        Forgot/Change PIN
+    function onDeviceReady() {
+    var apiURL = '../../NnoteApi/api/';
+    //var apiURL = 'http://115.241.194.19/NnoteApi/api/';
+    function onBackKeyDown() {
+    function isPhoneGap() {
+            /^file:\/{3}[^\/]/i.test(window.location.href) &&
+    $(document).ready(function () {
+        $("#regno").focus();
+        $("#regno").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 99999999999) {
+        $("#pin").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 999999) {
+        $('#login').click(function () {
+            $.get(apiURL + 'Patient/IsInPatient/' + $("#regno").val(), function (response) {
+                    patData.Regno = $("#regno").val();
+                    patData.PIN = $("#pin").val();
+                    if ($("#regno").val() == "") {
+                        $("#regno").focus();
+                    } else if ($("#pin").val() == "") {
+                        alert('Please enter PIN');
+                        $("#pin").focus();
+                        $.post(apiURL + 'Patient/Validate', patData, function (response) {
+                                setTimeout(function () {
+                                    window.location.href = 'layout.html?regno=' +
+                                            "#regno").val());
+                                alert('Invalid Registration No/PIN. Please check.')
+                                $("#regno").val("");
+                                $("#pin").val("");
+                                $("#regno").focus();
+                        }, 'json').fail(function (jqxhr, settings, ex) {
+            }).fail(function () {
+        $('#forgotpin').click(function () {
+            window.location.href = 'changepin.html';
+    function CheckAppUpdate() {
+        $.get("./version.xml", function (data) {}).done(function (result) {
+            $.get(apiURL + 'Notifications/App/4029038', {
+            }, function (response) {
+                        window.location.href = "download.html";
+            }).fail(function () {
+        }).fail(function (jqxhr, settings, ex) {
+==================== ncare/layout.html ====================
+    <input type="hidden" id="regno" />
+    var apiURL = '../../NnoteApi/api/';
+    //var apiURL = 'http://115.241.194.19/NnoteApi/api/';
+    function onDeviceReady() {
+        document.addEventListener("backbutton", function (e) {
+    function qs() {
+        var query = window.location.search.substring(1);
+            $("#regno").val(atob(qsParm["regno"]));
+            window.location.href = 'index.html';
+    function isPhoneGap() {
+            /^file:\/{3}[^\/]/i.test(window.location.href) &&
+    var timeout = setInterval(function runMe() {
+    $(document).ready(function () {
+        $.get("./version.xml", function (data) {}).done(function (result) {
+        }).fail(function (jqxhr, settings, ex) {
+            $('#ifrm').attr('src', 'request.html?regno=' + btoa($("#regno").val()) + "&sid=" + btoa($("#hsid").val()) + "&sname=" + btoa($("#hsname").val())
+            $('#ifrm').attr('src', 'AssetTrans.html?regno=' + btoa($("#regno").val()) + "&ano=" + btoa($("#hano").val()));
+            $('#ifrm').attr('src', 'profile.html?regno=' + btoa($("#regno").val()));
+        $('#notifications').click(function () {
+            //$('#ifrm').attr('src', 'notifications.html?regno=' + btoa($("#regno").val()));
+        $('#signout').click(function () {
+            $.get(apiURL + 'User/LogOut/' + $("#regno").val(), function (response) {
+                window.location.href = 'index.html';
+            }).fail(function () {
+                window.location.href = 'index.html';
+        $('#profile').click(function () {
+            $('#ifrm').attr('src', 'profile.html?regno=' + btoa($("#regno").val()));
+        $('#services').click(function () {
+            $('#ifrm').attr('src', 'services.html?regno=' + btoa($("#regno").val()));
+        $('#status').click(function () {
+            $('#ifrm').attr('src', 'editrequest.html?regno=' + btoa($("#regno").val()));
+        $('#reopen').click(function () {
+            $('#ifrm').attr('src', 'reopen.html?regno=' + btoa($("#regno").val()));
+        $('#reports').click(function () {
+            $('#ifrm').attr('src', 'labreports.html?regno=' + btoa($("#regno").val()));
+    function ShowNotifications() {
+        $.get(apiURL + 'Notifications/' + $("#regno").val(), function (response) {
+                selectedArray = jQuery.grep(arrdata, function (data, i) {
+        }).fail(function () {
+    function ShowAppUpdate() {
+        $.get(apiURL + 'Notifications/App/4029038', function (response) {
+                    $('#download').click(function () {
+                        $(this).attr('href', 'http://115.241.194.19/nNote.apk');
+        }).fail(function () {
+==================== ncare/changepin.html ====================
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+        input#pin,#cnfpin {
+        input#pin,#cnfpin {
+        input#pin,#cnfpin {
+        input#pin,#cnfpin {
+                    <div class="ui red ribbon label">Change PIN</div><br><br>
+                                <input name="regno" id="regno" placeholder="Registration No" type="number"
+                                <input name="pin" id="pin" placeholder="New PIN" type="password" maxlength="6">
+                                <input name="pin" id="cnfpin" placeholder="Confirm PIN" type="password" maxlength="6">
+    function onDeviceReady() {
+    var apiURL = '../../NnoteApi/api/';
+    //var apiURL = 'http://115.241.194.19/NnoteApi/api/';
+    function onBackKeyDown() {
+    function isPhoneGap() {
+            /^file:\/{3}[^\/]/i.test(window.location.href) &&
+    $(document).ready(function () {
+        $("#regno").focus();
+        $("#regno").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 99999999999) {
+        $("#pin").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 999999) {
+        $("#cnfpin").keypress(function (e) {
+            var typing_char = String.fromCharCode(e.which);
+            if (parseFloat(current_val + "" + typing_char) > 999999) {
+        $('#change').click(function () {
+            $.get(apiURL + 'Patient/IsInPatient/' + $("#regno").val(), function (response) {
+                    patData.Regno = $("#regno").val();
+                    patData.PIN = $("#pin").val();
+                    patData.ConfirmPIN = $("#cnfpin").val();
+                    if ($("#regno").val() == "") {
+                        $("#regno").focus();
+                    } else if ($("#pin").val() == "") {
+                        alert('Please enter PIN');
+                        $("#pin").focus();
+                    } else if ($("#cnfpin").val() == "") {
+                        alert('Please enter Confirm PIN');
+                        $("#cnfpin").focus();
+                    } else if ($("#cnfpin").val() != $("#pin").val()) {
+                        alert('New PIN and Confirm PIN should be equal');
+                        $("#pin").focus();
+                        $.post(apiURL + 'Patient/ChangePin', patData, function (response) {
+                                setTimeout(function () {
+                                    window.location.href = 'index.html';
+                                alert('New PIN and Confirm PIN should be equal. Please check.')
+                                $("#regno").val("");
+                                $("#pin").val("");
+                                $("#cnfpin").val("");
+                                $("#regno").focus();
+                        }, 'json').fail(function (jqxhr, settings, ex) {
+            }).fail(function (jqxhr, settings, ex) {
+        $('#cancel').click(function () {
+            window.location.href = 'index.html';
+                                                                                                                                                                                                                                                                              
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
