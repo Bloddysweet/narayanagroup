@@ -1,0 +1,124 @@
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== 1. Check inventory default.asp?logInFlag= ===" && curl -k -s "https://narayanagroup.co.in/inventory/default.asp?logInFlag=0" | grep -C 3 -i "Invalid\|Login\|Flag\|FONT" && echo -e "\n=== 2. Check /ntask/ headers & cookies ===" && curl -k -s -I "https://narayanagroup.co.in/ntask/" && echo -e "\n=== 3. Check NCLINIC Script.js ===" && curl -k -s "https://narayanagroup.co.in/NCLINIC/Scripts/Script.js" | head -n 35
+=== 1. Check inventory default.asp?logInFlag= ===
+                <script language="javascript">
+function fnLoad()
+{
+   document.form1.LoginId.focus();
+} 
+                </script>
+
+--
+                                                <br><br>
+                                                <br>
+                                                <br>
+                                                <div align="left">&nbsp;&nbsp;&nbsp; <FONT face="verdana" color="black" size="2"><STRONG>
+                                                                        <CENTER><FONT COLOR=RED>There is no such Login Id</FONT></CENTER>
+                                                                </STRONG></FONT>
+                                                </div>
+                                        </td>
+                                </tr>
+--
+                                        <td width="363" ><p>&nbsp;</p>
+                                                <table width="200" border="0" align="center">
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">LoginID</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <input onKeyDown="enter()" size="15" name="LoginId">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Opr 
+                                                                                                Code</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <input onKeyDown="enter()" size="15" name="UserName">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Password</font></strong></font></td>
+                                                                <td><font color="#014F99"><strong><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><INPUT onkeydown="enter1()" type="password" size="15" name="password">
+                                                                                        </font></strong></font>
+                                                                </td>
+                                                        </tr>
+                                                        <TR>
+                                                                <TD>&nbsp;</TD>
+                                                                <td><a href="JavaScript:check()"><img src="COMMONFILES/IMAGES/loginqq.jpg" alt="login" height="32" border="0"></a></td>
+                                                        </TR>
+                                                </table>
+                                                <div align="left"></div>
+--
+                        <!--<table cellSpacing="0" cellPadding="0" width="80%" align="center" border="0">
+                                <tr>
+                                        <td></A><br>
+                                                <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2"></font></div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td height="34">
+                                                <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="1">A 
+                                                                Product of Narayana Group. All Rights Reserved.@2010</font></div>
+                                        </td>
+                                </tr>
+                        </table>-->
+--
+
+function check()
+{
+if (chkName(document.form1.LoginId.value,"Login ID")==false)
+document.form1.LoginId.focus();
+   else if (chkName(document.form1.UserName.value,"User Name")==false)
+                document.form1.UserName.focus();
+   else if (chkName(document.form1.password.value,"Password")==false)
+
+=== 2. Check /ntask/ headers & cookies ===
+HTTP/1.1 200 OK
+Date: Sun, 11 Oct 2026 12:19:12 GMT
+Server: Apache
+Cache-Control: no-cache, private
+Content-Type: text/html; charset=utf-8
+X-Powered-By: PHP/8.3.33
+X-Powered-By: ASP.NET
+Set-Cookie: XSRF-TOKEN=eyJpdiI6ImdabUR6dllQRlpUNWEzYjNMeWVsV0E9PSIsInZhbHVlIjoiV3g1b2t5bm9rTVB6SVpkS1AydjBMS1NwK05QeXN0dDJMQkhSUUdvSW01aGZXSG4raTNsRDM5VFR0WUtKWFpqdmFIQys0Tkd6MWtocVdBQjg0S202MUNmM1FFM0tNODFHN2grb2xZWEtBZVFJVDF6MUhzQUNvcHAwc1VOVnpHbGsiLCJtYWMiOiJkMGU1NDI5Njc4MGE4ZWZjYjY4MWUyYTEwOWY5OGE4MGJlYjI3ZjVhMmFhNmVmZGRlODVlMGFkMDQxNjhmYzk2IiwidGFnIjoiIn0%3D; expires=Sun, 11 Oct 2026 14:19:12 GMT; Max-Age=7200; path=/; secure; samesite=lax
+Set-Cookie: ntask-session=eyJpdiI6Im9WdmdHUUJnQjVKTXl1cWRNSmFueGc9PSIsInZhbHVlIjoiaVR5OFFkU0diS2NJNmFmKzBRR205Qk1oVWhtOUFUNVJZUmY2UGpRd2hjczNLdi9kUm15L2V2SUtYWnF3Y2N6amtuV21udC81blE5eGJsZGowUXBrU3lldnpiRmRBRVFBZytaaGk3OTFjNFZRSnhPcUZNNGdGU3pDNGJCeTZEcGkiLCJtYWMiOiJkODZlNDQ3ZGIzNGZiZTE2Njk4ZjUxZDcyNGMwYjAzNjVhMjVmNjUxZDllY2UyOTc4NzJiOGUwMzQxZWFkZWE1IiwidGFnIjoiIn0%3D; expires=Sun, 11 Oct 2026 14:19:12 GMT; Max-Age=7200; path=/; secure; httponly; samesite=lax
+
+
+=== 3. Check NCLINIC Script.js ===
+// JavaScript File
+// Modified By : Raghavendra
+
+window.history.forward(1);
+window.history.go(1);
+function Load()
+{
+    window.status="Narayana Hospital Information System.";
+}
+setInterval("Load()",10)
+    // ******** Disabling Refresh key and F5 in keyboard ************
+    document.onkeydown = document.onkeypress = document.onkeyup = function(evt) {
+        var event = evt || window.event;
+        if (String.fromCharCode(event.which || event.keyCode).toLowerCase() == 'r' && event.ctrlKey) {
+            if (typeof event.stopPropagation != 'undefined') {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            else {
+                event.returnValue = false;
+                event.cancelBubble = true;
+            }
+        }
+    }
+    document.attachEvent("onkeydown", my_onkeydown_handler); 
+    function my_onkeydown_handler() 
+    { 
+        switch (event.keyCode) 
+        { 
+            case 116 : // 'F5' 
+            event.returnValue = false; 
+            event.keyCode = 0;
+            break; 
+        } 
+    }
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
