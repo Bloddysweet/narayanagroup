@@ -1,0 +1,28 @@
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && mkdir -p photos && cd photos && curl -k -s -m 20 -o 00_placeholder.png "https://narayanagroup.co.in/NtraktApi/api/StudentAvailability/1" && curl -k -s -m 20 -o 01_showpicture_3334024.bin "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/3334024" && curl -k -s -m 20 -o 02_showpicture_45605236.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45605236" && curl -k -s -m 20 -o 03_showpicture_45604917.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45604917" && curl -k -s -m 20 -o 04_showpicture_45604916.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45604916" && file * && echo -e "\n=== HASHES — identical hash means identical image ===" && md5sum * && echo -e "\n=== VIEW ===" && (xdg-open 02_showpicture_45605236.jpg 2>/dev/null && echo "opened in viewer") || echo "open manually: $(pwd)/02_showpicture_45605236.jpg" ; ls -la
+00_placeholder.png:          PNG image data, 220 x 220, 8-bit/color RGB, non-interlaced
+01_showpicture_3334024.bin:  PNG image data, 220 x 220, 8-bit/color RGB, non-interlaced
+02_showpicture_45605236.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 150x150, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=8, manufacturer=Canon, model=CanoScan LiDE 120, orientation=upper-left, software=IJ Scan Utility, datetime=2024/01/22 18:26:27], baseline, precision 8, 190x255, components 3
+03_showpicture_45604917.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 300x300, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=12], baseline, precision 8, 411x526, components 3
+04_showpicture_45604916.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 300x300, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=12], baseline, precision 8, 410x527, components 3
+
+=== HASHES — identical hash means identical image ===
+cac0548b3c83a8ff9fd292d6da1b21f1  00_placeholder.png
+cac0548b3c83a8ff9fd292d6da1b21f1  01_showpicture_3334024.bin
+3ebbe43690fa9c325fa50e23abb15f99  02_showpicture_45605236.jpg
+a545766927ff2d2b628e95f14f30637d  03_showpicture_45604917.jpg
+5f802a23ef5c240823c9f189831806cc  04_showpicture_45604916.jpg
+
+=== VIEW ===
+opened in viewer
+total 180
+drwxrwxr-x 2 kalics kalics  4096 Oct 12 02:59 .
+drwxrwxr-x 3 kalics kalics  4096 Oct 12 02:59 ..
+-rw-rw-r-- 1 kalics kalics  7155 Oct 12 02:59 00_placeholder.png
+-rw-rw-r-- 1 kalics kalics  7155 Oct 12 02:59 01_showpicture_3334024.bin
+-rw-rw-r-- 1 kalics kalics 13626 Oct 12 02:59 02_showpicture_45605236.jpg
+-rw-rw-r-- 1 kalics kalics 76879 Oct 12 02:59 03_showpicture_45604917.jpg
+-rw-rw-r-- 1 kalics kalics 63915 Oct 12 02:59 04_showpicture_45604916.jpg
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit/photos]
+└─$ 
