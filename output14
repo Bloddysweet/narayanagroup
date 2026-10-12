@@ -1,0 +1,61 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+┌──(kalics㉿kalics)-[~/narayana-audit/infra]
+└─$ cd ~/narayana-audit/infra && echo "=== A. IS 115.241.194.5 THE FEE PORTAL? ===" && for u in "http://115.241.194.5/" "http://115.241.194.5/onlinefeepay/" "http://115.241.194.5/onlinefeepay/razorpay/CreateOrderNew.aspx" ; do printf "   %-62s " "$u" ; curl -k -s -m 15 -L -o /tmp/f.html -w "%{http_code} " "$u" ; python3 -c "
+import re,os
+h=open('/tmp/f.html',encoding='utf-8',errors='replace').read() if os.path.exists('/tmp/f.html') else ''
+print('|', (re.search(r'<title[^>]*>(.*?)</title>',h,re.S|re.I) or [None,'-'])[1].strip()[:40], '|', len(h),'b')
+" ; done ; echo -e "\n=== B. NMC 8080 DASHBOARD ===" && curl -s -m 15 -L -o dash.html "http://115.241.194.13:8080/dashboard/" && python3 -c "
+import re
+h=open('dash.html',encoding='utf-8',errors='replace').read()
+print('   bytes:',len(h))
+print('   title:',(re.search(r'<title[^>]*>(.*?)</title>',h,re.S|re.I) or [None,'-'])[1].strip()[:60])
+print('   forms:',len(re.findall(r'<form',h,re.I)),'inputs:',len(re.findall(r'<input',h,re.I)))
+for k in ['login','password','username','admin','laravel','codeigniter','wordpress','phpmyadmin']:
+    if k in h.lower(): print('   kw   :',k)
+print('   links:',re.findall(r'href=[\"\x27]([^\"\x27]+)',h)[:10])
+" ; echo -e "\n=== C. PACS — FIND THE JS BUNDLE ===" && curl -k -s -m 20 "https://pacs.narayanagroup.co.in/" -o pacs.html && grep -oE '(src|href)="[^"]*"' pacs.html ; echo "   --- body ---" ; python3 -c "
+import re
+h=open('pacs.html',encoding='utf-8',errors='replace').read()
+print(re.sub(r'\s+',' ',h)[:550])
+" ; echo -e "\n=== D. HELPDESK — WHAT ARE THE 90 BYTES? ===" && curl -s -m 15 -D - "http://helpdesk.narayanagroup.co.in/" | tr -d '\r' | head -n 18 ; rm -f dash.html pacs.html /tmp/f.html
+=== A. IS 115.241.194.5 THE FEE PORTAL? ===
+   http://115.241.194.5/                                          200 | IIS Windows Server | 672 b
+   http://115.241.194.5/onlinefeepay/                             000 | IIS Windows Server | 672 b
+   http://115.241.194.5/onlinefeepay/razorpay/CreateOrderNew.aspx 000 | IIS Windows Server | 672 b
+
+=== B. NMC 8080 DASHBOARD ===
+   bytes: 5187
+   title: Welcome to XAMPP
+   forms: 0 inputs: 0
+   kw   : admin
+   kw   : phpmyadmin
+   links: ['/dashboard/stylesheets/normalize.css', '/dashboard/stylesheets/all.css', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css', '/dashboard/images/favicon.png', '/dashboard/index.html', '#', '/dashboard/faq.html', '/dashboard/howto.html', '/dashboard/phpinfo.php', '/phpmyadmin/']
+
+=== C. PACS — FIND THE JS BUNDLE ===
+href="/resources/media/favicon.ico"
+src="/externalConfig.js"
+src="/purify.js"
+src="/tiff.min.js"
+href="/logo192.png"
+href="/manifest.json"
+href="/resources/app-style.css"
+src="/resources/languages/LC.js"
+src="/static/js/main.e9a61875.js"
+href="/static/css/main.e908baad.css"
+   --- body ---
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><style>.svgLoader{animation:spin .8s linear infinite;margin:auto}.divLoader{width:200px;height:200px;display:flex;align-items:center;justify-content:center;z-index:9999;position:absolute;top:40%;left:40%}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}</style><link rel="icon" href="/resources/media/favicon.ico"/><script type="text/javascript" src="/externalConfig.js"></script><script type="text/javascript" src="/purify.js"></script><script type="text/javascript" s
+
+=== D. HELPDESK — WHAT ARE THE 90 BYTES? ===
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:29:03 GMT
+Server: Apache/2.4.23 (Win64) PHP/5.6.25
+Last-Modified: Sat, 11 Jul 2026 11:42:21 GMT
+ETag: "5a-65654599dff6f"
+Accept-Ranges: bytes
+Content-Length: 90
+Content-Type: text/html
+
+<meta http-equiv="Refresh" content="1; url=http://helpdesk.narayanagroup.co.in/helpdesk/">                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit/infra]
+└─$ 
+
